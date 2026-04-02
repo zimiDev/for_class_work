@@ -6,7 +6,7 @@
   { "id": 5, "name": "ASUS ROG Zephyrus G16", "desc": "RTX 4070, i9-13980HX, 240 Гц экран", "price": 21800000, "cat": "laptop", "img": "https://images.unsplash.com/photo-1593640408182-31c70c8268f5?w=400&h=300&fit=crop" },
   { "id": 6, "name": "Lenovo ThinkPad X1 Carbon", "desc": "Ультрабук для бизнеса, 14\" 2.8K OLED", "price": 15200000, "cat": "laptop", "img": "https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?w=400&h=300&fit=crop" },
   { "id": 7, "name": "AirPods Pro 2 USB-C", "desc": "Активное шумоподавление, адаптивный звук", "price": 3200000, "cat": "accessory", "img": "https://images.unsplash.com/photo-1606220588913-b3aacb4d2f46?w=400&h=300&fit=crop" },
-  { "id": 8, "name": "Samsung Galaxy Watch 6", "desc": "Часы с AMOLED, мониторинг здоровья", "price": 2800000, "cat": "accessory", "img": "https://images.unsplash.com/photo-1546868871-af0de0ae72be?w=400&h=300&fit=crop" },
+  { "id": 8, "name": "Samsung Galaxy Watch 6", "desc": "Часы с AMOLED, мониторинг здоровья", "price": 2800000, "cat": "accessory", "img": "this.src='https://via.placeholder.com/400x300?text=No+Image" },
   { "id": 9, "name": "Anker 65W GaN зарядка", "desc": "Компактная, 3 порта USB-C PD 3.0", "price": 380000, "cat": "accessory", "img": "https://images.unsplash.com/photo-1625772452859-1c03d5bf1137?w=400&h=300&fit=crop" },
   { "id": 10, "name": "OnePlus 12", "desc": "Snapdragon 8 Gen 3, 100W зарядка", "price": 7800000, "cat": "phone", "img": "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=400&h=300&fit=crop" },
   { "id": 11, "name": "Dell XPS 15", "desc": "Intel Ultra 7, OLED 3.5K, 32 ГБ RAM", "price": 19800000, "cat": "laptop", "img": "https://images.unsplash.com/photo-1593642702821-c8da6771f0c6?w=400&h=300&fit=crop" },
