@@ -1,91 +1,64 @@
 let products = [];
-let currentFilter = 'all';
-let searchQuery = '';
+const tags = { phone: 'Смартфон', laptop: 'Ноутбук', accessory: 'Аксессуар' };
+let filter = 'all';
+let query = '';
 
-const productsGrid = document.getElementById('productsGrid');
+const grid = document.getElementById('grid');
 const searchInput = document.getElementById('searchInput');
-const filterBtns = document.querySelectorAll('.filter-btn');
-const themeToggle = document.getElementById('themeToggle');
+const fbtns = document.querySelectorAll('.fbtn');
 
-const categoryLabels = { phone: 'Смартфон', laptop: 'Ноутбук', accessory: 'Аксессуар' };
-
-
+// JSON fayldan mahsulotlarni yuklab olish
 async function fetchProducts() {
-    try {
-        const response = await fetch('products.json');
-        products = await response.json();
-        render();
-    } catch (error) {
-        console.error("Ma'lumot yuklashda xatolik:", error);
-        productsGrid.innerHTML = '<div class="empty-state"><p>Ошибка загрузки данных</p></div>';
-    }
-}
-
-function getFiltered() {
-    return products.filter(p => {
-        const matchCat = currentFilter === 'all' || p.category === currentFilter;
-        const matchSearch = p.name.toLowerCase().includes(searchQuery) || 
-                          p.desc.toLowerCase().includes(searchQuery);
-        return matchCat && matchSearch;
-    });
+  try {
+    const res = await fetch('products.json');
+    products = await res.json();
+    render();
+  } catch (err) {
+    console.error("Xatolik:", err);
+    grid.innerHTML = '<div class="empty">Ошибка загрузки данных</div>';
+  }
 }
 
 function render() {
-    const list = getFiltered();
-    productsGrid.innerHTML = '';
+  const list = products.filter(p => {
+    const ok = filter === 'all' || p.cat === filter;
+    const s = p.name.toLowerCase().includes(query) || p.desc.toLowerCase().includes(query);
+    return ok && s;
+  });
 
-    if (!list.length) {
-        productsGrid.innerHTML = '<div class="empty-state"><i class="fa-solid fa-box-open"></i><p>Товары не найдены</p></div>';
-        return;
-    }
+  if (!list.length) {
+    grid.innerHTML = '<div class="empty">Ничего не найдено</div>';
+    return;
+  }
 
-    list.forEach((p, i) => {
-        const card = document.createElement('article');
-        card.className = 'product-card';
-        card.style.animationDelay = (i * 0.06) + 's';
-        card.innerHTML = `
-          <div class="product-img-wrap">
-            <img class="product-img" src="${p.img}" alt="${p.name}" loading="lazy">
-            <span class="product-category-tag">${categoryLabels[p.category]}</span>
-          </div>
-          <div class="product-info">
-            <div class="product-name">${p.name}</div>
-            <div class="product-desc">${p.desc}</div>
-            <div class="product-price">${(p.price / 1000).toFixed(0)}K <span>сум</span></div>
-          </div>`;
-        productsGrid.appendChild(card);
-    });
+  grid.innerHTML = list.map(p => `
+    <div class="card">
+      <img src="${p.img}" alt="${p.name}">
+      <div class="card-body">
+        <div class="card-tag">${tags[p.cat]}</div>
+        <div class="card-name">${p.name}</div>
+        <div class="card-desc">${p.desc}</div>
+        <div class="card-price">${(p.price / 1000).toFixed(0)}K сум</div>
+        <div class="card-btns">
+          <button>Details</button>
+          <button class="btn-add">Add</button>
+        </div>
+      </div>
+    </div>
+  `).join('');
 }
 
+fbtns.forEach(b => b.addEventListener('click', () => {
+  fbtns.forEach(x => x.classList.remove('on'));
+  b.classList.add('on');
+  filter = b.dataset.f;
+  render();
+}));
 
 searchInput.addEventListener('input', e => {
-    searchQuery = e.target.value.toLowerCase().trim();
-    render();
+  query = e.target.value.toLowerCase().trim();
+  render();
 });
 
-
-filterBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-        filterBtns.forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        currentFilter = btn.dataset.filter;
-        render();
-    });
-});
-
-function setTheme(dark) {
-    document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
-    themeToggle.innerHTML = dark ? '<i class="fa-solid fa-sun"></i>' : '<i class="fa-solid fa-moon"></i>';
-    localStorage.setItem('theme', dark ? 'dark' : 'light');
-}
-
-themeToggle.addEventListener('click', () => {
-    setTheme(document.documentElement.getAttribute('data-theme') !== 'dark');
-});
-
-// Dastlabki yuklash
-const savedTheme = localStorage.getItem('theme');
-const preferDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-setTheme(savedTheme ? savedTheme === 'dark' : preferDark);
-
+// Loyihani ishga tushirish
 fetchProducts();
