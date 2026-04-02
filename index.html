@@ -3,37 +3,32 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>VoltStore — Магазин электроники</title>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <title>VoltStore — Electronics Shop</title>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="style.css"> </head>
+  <link rel="stylesheet" href="style.css">
+</head>
 <body>
 
-  <header class="site-header">
-    <div class="header-inner">
-      <div class="logo">
-        <i class="fa-solid fa-bolt"></i> VoltStore
-      </div>
-      <div class="search-box">
-        <i class="fa-solid fa-magnifying-glass"></i>
-        <input type="text" id="searchInput" placeholder="Поиск товаров...">
-      </div>
-      <button class="theme-toggle" id="themeToggle" aria-label="Сменить тему">
-        <i class="fa-solid fa-moon"></i>
-      </button>
+  <header>
+    <div class="logo">VoltStore</div>
+    <div class="search">
+      <input type="text" id="searchInput" placeholder="Поиск...">
+    </div>
+    <div class="top-btns">
+      <button><i class="fa-solid fa-moon"></i></button>
+      <button><i class="fa-solid fa-bag-shopping"></i></button>
     </div>
   </header>
 
-  <div class="toolbar">
-    <button class="filter-btn active" data-filter="all">Все</button>
-    <button class="filter-btn" data-filter="phone">Смартфоны</button>
-    <button class="filter-btn" data-filter="laptop">Ноутбуки</button>
-    <button class="filter-btn" data-filter="accessory">Аксессуары</button>
+  <div class="filters">
+    <button class="fbtn on" data-f="all">Все</button>
+    <button class="fbtn" data-f="phone">Смартфоны</button>
+    <button class="fbtn" data-f="laptop">Ноутбуки</button>
+    <button class="fbtn" data-f="accessory">Аксессуары</button>
   </div>
 
-  <main class="products-section">
-    <div class="products-grid" id="productsGrid"></div>
-  </main>
+  <div class="grid" id="grid"></div>
 
-  <script src="script.js"></script> </body>
+  <script src="script.js"></script>
+</body>
 </html>
